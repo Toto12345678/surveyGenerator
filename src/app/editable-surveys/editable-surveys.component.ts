@@ -28,4 +28,8 @@ export class EditableSurveysComponent implements OnInit {
       });
   }
 
+  deleteSurvey(survey:any){
+    console.log(survey)
+  }
+
 }

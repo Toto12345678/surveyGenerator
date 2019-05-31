@@ -15,7 +15,14 @@
     </section>
   </div>
   <div *ngFor='let survey of surveys' class='column is-3'>
-    <section class="hero is-dark is-bold is-rounded">
+    <section class="hero is-dark is-bold is-round">
+      <p (click)='deleteSurvey(survey)'>
+        <a class='button is-dark has-text-warning is-rounded is-pulled-right'>
+          <span class="icon is-small">
+            <i class="fas fa-times"></i>
+          </span>
+        </a>
+      </p>
       <div class="hero-body">
         <div class="container">
           <h1 class="title has-text-warning">
