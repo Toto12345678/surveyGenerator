@@ -112,7 +112,7 @@ export class SurveyGeneratorComponent implements OnInit {
     this.noSurvey = true
   }
 
-  saveSurvey(){
+  saveSurvey(draft: boolean){
     this.survey.questions = this.questions.slice()
     
     this.apollo.mutate({
@@ -120,7 +120,8 @@ export class SurveyGeneratorComponent implements OnInit {
       variables: {
         name: this.survey.name,
         description: this.survey.description,
-        questions: JSON.stringify(this.survey.questions)
+        questions: JSON.stringify(this.survey.questions),
+        draft: draft
       },
     })
     .subscribe(data => {

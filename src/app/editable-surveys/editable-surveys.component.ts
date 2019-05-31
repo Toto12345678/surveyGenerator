@@ -28,8 +28,26 @@ export class EditableSurveysComponent implements OnInit {
       });
   }
 
-  deleteSurvey(survey:any){
-    console.log(survey)
-  }
+  deleteSurvey(id: number){
+    this.apollo.mutate({
+      mutation: Query.deleteSurvey,
+      variables: {
+        id: id
+      },
+      update: (proxy, { data: { deleteProduct } }) => {
+        const data: any = proxy.readQuery({ query: Query.readSurveys });
 
+        const index = this.surveys.findIndex(x => x.id == id)
+        this.surveys.splice(index, 1);
+
+        proxy.writeQuery({ query: Query.readSurveys, data });
+      }
+    })
+    .subscribe(data => {
+      console.log(data);
+    },
+    error => {
+      console.log(error);
+    });
+  }
 }

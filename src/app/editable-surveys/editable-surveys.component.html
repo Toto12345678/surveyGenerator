@@ -16,7 +16,7 @@
   </div>
   <div *ngFor='let survey of surveys' class='column is-3'>
     <section class="hero is-dark is-bold is-round">
-      <p (click)='deleteSurvey(survey)'>
+      <p (click)='deleteSurvey(survey.id)'>
         <a class='button is-dark has-text-warning is-rounded is-pulled-right'>
           <span class="icon is-small">
             <i class="fas fa-times"></i>
