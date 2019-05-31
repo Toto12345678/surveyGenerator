@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormArray } from '@angular/forms';
+
+import { Apollo } from 'apollo-angular';
+import * as Query from '../query'; //to import everything from file
+
 @Component({
   selector: 'app-survey-generator',
   templateUrl: './survey-generator.component.html',
@@ -9,15 +13,22 @@ import { FormBuilder, FormGroup, Validators, FormArray } from '@angular/forms';
 export class SurveyGeneratorComponent implements OnInit {
   title = 'SurveyGenerator';
   formNewQuestion : FormGroup
+  survey: any = {
+    'name':'',
+    'description':'',
+    'questions': []
+  }
   questions : any = []
   options : any = []
-  isEdit: Boolean = false
+  isEdit: boolean = false
   questionId: number = 0
+  noSurvey: boolean = true
 
   isMultiple : boolean = false
 
   constructor(
     private formBuilder : FormBuilder,
+    private apollo: Apollo
   ) {}
 
   ngOnInit() {
@@ -92,8 +103,31 @@ export class SurveyGeneratorComponent implements OnInit {
     this.isEdit = false
   }
 
-  deleteSurvey(){
-    this.questions.splice(0,this.questions.length)
+  newSurvey(){
+    this.noSurvey = false
   }
 
+  deleteSurvey(){
+    this.questions.splice(0,this.questions.length)
+    this.noSurvey = true
+  }
+
+  saveSurvey(){
+    this.survey.questions = this.questions.slice()
+    
+    this.apollo.mutate({
+      mutation: Query.createSurvey,
+      variables: {
+        name: this.survey.name,
+        description: this.survey.description,
+        questions: JSON.stringify(this.survey.questions)
+      },
+    })
+    .subscribe(data => {
+      console.log(data);
+    },
+    error => {
+      console.log(error);
+    })
+  }
 }
