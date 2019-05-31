@@ -4,23 +4,25 @@ import gql from 'graphql-tag';
 
 //mutation to insert a product
 export const createSurvey = gql`
-  mutation createSurvey($name: String!, $description: String!, $questions: String!) {
-    createSurvey(name: $name, description: $description, questions: $questions){
+  mutation createSurvey($name: String!, $description: String!, $questions: String!, $draft: Boolean!) {
+    createSurvey(name: $name, description: $description, questions: $questions, draft: $draft){
       id,
       name,
       description,
-      questions
+      questions,
+      draft
     }
   }`;
 
   //mutation to update a product
   export const updateSurvey = gql`
-    mutation updateSurvey($id: Int!, $name: String!, $description: String!, $questions: String!) {
-      updateSurvey(id: $id, name: $name, description: $description, questions: $questions){
+    mutation updateSurvey($id: Int!, $name: String!, $description: String!, $questions: String!, $draft: Boolean!) {
+      updateSurvey(id: $id, name: $name, description: $description, questions: $questions, draft: $draft) {
         id,
         name,
         description,
-        questions
+        questions,
+        draft
       }
     }`;
 
@@ -31,7 +33,8 @@ export const createSurvey = gql`
         id,
         name,
         description,
-        questions
+        questions,
+        draft
       }
     }`;
 
@@ -42,7 +45,8 @@ export const createSurvey = gql`
         id,
         name,
         description,
-        questions
+        questions,
+        draft
       }
     }`;
 
@@ -52,6 +56,7 @@ export const createSurvey = gql`
         id,
         name,
         description,
-        questions
+        questions,
+        draft
       }
     }`;
