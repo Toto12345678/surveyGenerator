@@ -23,7 +23,7 @@
           </span>
         </a>
       </p>
-      <div class="hero-body">
+      <div class="hero-body" [routerLink]="'/survey/'+survey.id">
         <div class="container">
           <h1 class="title has-text-warning">
             {{survey.name}}

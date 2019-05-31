@@ -15,12 +15,10 @@ export class EditableSurveysComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log('entra')
     this.getSurveys();
   }
 
   getSurveys(){
-    console.log('Toto')
     this.apollo.watchQuery({ query: Query.readSurveys }).valueChanges
       .subscribe(response => {
         this.surveys = response.data['readSurveys'];

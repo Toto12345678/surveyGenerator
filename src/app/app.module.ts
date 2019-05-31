@@ -7,12 +7,14 @@ import { EditableSurveysComponent } from './editable-surveys/editable-surveys.co
 import { SurveyGeneratorComponent } from './survey-generator/survey-generator.component';
 import { GraphQLModule } from './graphql.module';
 import { HttpClientModule } from '@angular/common/http';
+import { SurveyComponent } from './survey/survey.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     EditableSurveysComponent,
-    SurveyGeneratorComponent
+    SurveyGeneratorComponent,
+    SurveyComponent
   ],
   imports: [
     BrowserModule,
