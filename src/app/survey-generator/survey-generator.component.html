@@ -1,0 +1,152 @@
+<div class='columns is-mobile is-multiline full-height p-l-sm p-r-sm p-t-sm'>
+  <div class="column is-2">
+    <aside class="menu">
+      <p class="menu-label">
+        General
+      </p>
+      <ul class="menu-list">
+        <li routerLink='/editable-surveys'><a>Ver borradores</a></li>
+      </ul>
+      <p class="menu-label">
+        Acciones
+      </p>
+      <ul class="menu-list">
+        <li><a>Guardar como borrador</a></li>
+        <li (click)='deleteSurvey()'><a>Eliminar</a></li>
+        <li><a>Publicar</a></li>
+      </ul>
+    </aside>
+  </div>
+  <div class='column is-6-tablet is-12-mobile is-offset-1-tablet'>
+    <div [formGroup]="formNewQuestion" class="box hero is-light">
+      <p class="is-size-5 has-text-weight-bold has-text-centered">Nueva pregunta</p>
+  
+      <div class='field'>
+        <label class='label'>Tipo de pregunta</label>
+        <div class='control is-expanded'>
+          <div class='select is-fullwidth is-rounded is-warning'>
+            <select formControlName="type" (change)="checkChoosen()">
+              <option value="text">Texto</option>
+              <option value="select">Opción múltiple</option>
+              <option value="textarea">Textarea</option>
+              <option value="radio">Radio</option>
+              <option value="checkbox">Checkbox</option>
+            </select>
+          </div>
+        </div>
+      </div>
+  
+      <div class='field'>
+        <label class='label'>Título</label>
+        <div class='control'>
+          <input formControlName="title" class='input is-rounded is-warning' type="text" placeholder="aquí va la pregunta">
+        </div>
+      </div>
+  
+      <div *ngIf="!isMultiple" class='field'>
+        <label class='label'>Texto de ayuda</label>
+        <div class='control'>
+          <input formControlName="placeholder" class='input is-rounded is-warning' type="text" placeholder="Placeholder">
+        </div>
+      </div>
+      <ng-template [ngIf]="isMultiple">
+        <label class='label'>
+          Opciones
+          <a class='button is-warning is-rounded is-pulled-right' (click)='addOption()'>
+            <span class="icon is-small">
+              <i class="fas fa-plus"></i>
+            </span>
+          </a>
+        </label>
+        <div class='field' *ngFor='let op of options'>
+          <div class='control'>
+            <input [(ngModel)]="op.value" [ngModelOptions]="{standalone: true}" class='input is-rounded is-warning' type="text" (keyup.enter)="addOption()">
+          </div>
+        </div>
+      </ng-template>
+  
+      <button *ngIf='!isEdit' class="button is-warning" (click)='addQuestion()'>Añadir</button>
+      <button *ngIf='isEdit' class="button is-warning" (click)='editQuestion()'>Modificar</button>
+    </div>
+  </div>
+  
+  <div class='column is-6-tablet is-12-mobile is-offset-one-quarter-tablet'>
+    <form class='form'>
+      <ng-container *ngFor='let question of questions'>
+        
+        <div *ngIf="question.type === 'text'" class="field">
+          <label class="label is-size-5">
+            {{question.title}}
+            <a class='button is-warning is-rounded is-pulled-right' (click)='deleteQuestion(question)'>
+              <span class="icon is-small">
+                <i class="fas fa-times"></i>
+              </span>
+            </a>
+            <a class='button is-warning is-rounded is-pulled-right' (click)='setEditQuestion(question)'>
+              <span class="icon is-small">
+                <i class="fas fa-pencil-alt"></i>
+              </span>
+            </a>
+          </label>
+          <div class="control">
+            <input [ngClass]="['input',question.type]" type="text" placeholder="{{question.placeholder}}">
+          </div>
+        </div>
+
+        <div *ngIf="question.type === 'textarea'" class="field">
+          <label class="label is-size-5">
+            {{question.title}}
+            <a class='button is-warning is-rounded is-pulled-right' (click)='deleteQuestion(question)'>
+              <span class="icon is-small">
+                <i class="fas fa-times"></i>
+              </span>
+            </a>
+            <a class='button is-warning is-rounded is-pulled-right' (click)='setEditQuestion(question)'>
+              <span class="icon is-small">
+                <i class="fas fa-pencil-alt"></i>
+              </span>
+            </a>
+          </label>
+          <div class="control">
+            <textarea class="textarea has-fixed-size" type="text" placeholder="{{question.placeholder}}"></textarea>
+          </div>
+        </div>
+
+        <div *ngIf="question.type === 'select' || question.type === 'radio' || question.type === 'checkbox'" class="field">
+          <label class="label is-size-5">
+            {{question.title}}
+            <a class='button is-warning is-rounded is-pulled-right' (click)='deleteQuestion(question)'>
+              <span class="icon is-small">
+                <i class="fas fa-times"></i>
+              </span>
+            </a>
+            <a class='button is-warning is-rounded is-pulled-right' (click)='setEditQuestion(question)'>
+              <span class="icon is-small">
+                <i class="fas fa-pencil-alt"></i>
+              </span>
+            </a>
+          </label>
+          <div class="control is-expanded">
+            <div *ngIf="question.type === 'select'" class="question.type">
+              <div class='select is-fullwidth is-rounded'>
+                <select>
+                  <option *ngFor='let option of question.options'>{{option.value}}</option>
+                </select>
+              </div>
+            </div>
+            <ng-template [ngIf]="question.type != 'select'">
+              <ng-container *ngFor='let op of question.options'>
+                <label [ngClass]="['is-size-5',question.type]">
+                  <input [type]="question.type" class='is-small'> {{op.value}}
+                </label>
+                <br>
+              </ng-container>
+            </ng-template>
+          </div>
+        </div>
+
+      </ng-container>
+    </form>
+  </div>
+</div>
+  
