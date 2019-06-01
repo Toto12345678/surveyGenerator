@@ -28,7 +28,7 @@ export const createSurvey = gql`
 
   //mutation to delete a product
   export const deleteSurvey = gql`
-    mutation deleteProduct($id: Int!) {
+    mutation deleteSurvey($id: Int!) {
       deleteSurvey(id: $id){
         id,
         name,
@@ -40,7 +40,7 @@ export const createSurvey = gql`
 
   //get all products
   export const readSurveys = gql`
-    query{
+    query {
       readSurveys {
         id,
         name,
@@ -51,7 +51,7 @@ export const createSurvey = gql`
     }`;
 
   export const readSurvey = gql`
-    query{
+    query readSurvey($id: Int!){
       readSurvey(id: $id) {
         id,
         name,
