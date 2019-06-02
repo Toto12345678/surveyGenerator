@@ -1,1 +1,40 @@
+<nav class="navbar is-transparent is-black m-b-sm">
+  <div class="navbar-brand">
+    <div class='navbar-item is-unselectable' routerLink='/'>
+      <span class='icon is-medium'>
+        <i class="fas fa-fish fa-1x"></i>
+      </span>
+      <span class='title is-size-6 has-text-white'>
+        Survey Generator
+      </span>
+    </div>
+    <div class="navbar-burger burger" data-target="navbarExampleTransparentExample">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </div>
+
+  <div id="navbarExampleTransparentExample" class="navbar-menu">
+    <div class="navbar-start">
+      <a class="navbar-item" routerLink='/editable-surveys'>
+        Ver borradores
+      </a>
+      <a class="navbar-item" routerLink='/published-surveys'>
+        Ver publicados
+      </a>
+    </div>
+
+    <div class="navbar-end">
+      <div class="navbar-item">
+        <a class="button is-warning is-rounded is-outlined" routerLink='/'>
+          <span class="icon">
+            <i class="fas fa-plus"></i>
+          </span>
+          <span>Nueva encuesta</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</nav>
 <router-outlet></router-outlet>

@@ -7,7 +7,7 @@
             Encuestas
           </h1>
           <h2 class="subtitle">
-            Guardadas en borrador
+            Publicadas
             <a (click)='getSurveys()'>Recargar</a>
           </h2>
         </div>
@@ -15,7 +15,7 @@
     </section>
   </div>
   <ng-container *ngFor='let survey of surveys'>
-    <ng-template [ngIf]='survey.draft'>
+    <ng-template [ngIf]='!survey.draft'>
       <div class='column is-3'>
         <section class="hero is-dark is-bold is-round">
           <p (click)='deleteSurvey(survey.id)'>

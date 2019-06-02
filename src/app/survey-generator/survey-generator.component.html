@@ -1,23 +1,6 @@
 <div class='columns is-mobile is-multiline full-height p-l-sm p-r-sm'>
-  <div class="column is-2">
-    <aside class="menu">
-      <p class="menu-label">
-        General
-      </p>
-      <ul class="menu-list">
-        <li routerLink='/editable-surveys'><a>Ver borradores</a></li>
-      </ul>
-      <p class="menu-label">
-        Acciones
-      </p>
-      <ul class="menu-list">
-        <li (click)='saveSurvey(true)'><a>Guardar como borrador</a></li>
-        <li (click)='saveSurvey(false)'><a>Publicar encuesta</a></li>
-      </ul>
-    </aside>
-  </div>
-  <div class='column is-6-tablet is-12-mobile is-offset-1-tablet'>
-    <p class="title">Nueva encuesta</p>
+  <div class='column is-6-tablet is-12-mobile is-offset-one-quarter-tablet'>
+    <p class="title">Encuesta</p>
     <div class='box hero is-light'>
       <div class='field'>
         <label class='label'>Título</label>
@@ -80,7 +63,7 @@
   
   <div class='column is-6-tablet is-12-mobile is-offset-one-quarter-tablet'>
     <form class='form'>
-      <ng-container *ngFor='let question of questions'>
+      <ng-container *ngFor='let question of survey.questions'>
         
         <div *ngIf="question.type === 'text'" class="field">
           <label class="label is-size-5">
@@ -152,9 +135,34 @@
             </ng-template>
           </div>
         </div>
-
       </ng-container>
     </form>
   </div>
+</div>
+<div class="float-bottom">
+  <button class='button is-warning m-b-sm is-rounded' (click)='saveSurvey(false)'>
+    <span class='icon'>
+      <i class="far fa-paper-plane"></i>
+    </span>
+    <span>Publicar</span>
+  </button>
+  <button *ngIf='surveyId == null && survey.draft==null' class='button is-light m-b-sm is-rounded' (click)='saveSurvey(true)'>
+    <span class='icon'>
+      <i class="far fa-save"></i>
+    </span>
+    <span>Guardar</span>
+  </button>
+  <button *ngIf='(surveyId != null) && survey.draft' class='button is-light m-b-sm is-rounded' (click)='editSurvey(true)'>
+    <span class='icon'>
+      <i class="far fa-save"></i>
+    </span>
+    <span>Guardar draft</span>
+  </button>
+  <button class='button is-danger m-b-sm is-rounded' (click)='deleteSurvey()'>
+    <span class='icon'>
+      <i class="far fa-trash-alt"></i>
+    </span>
+    <span>Descartar</span>
+  </button>
 </div>
   

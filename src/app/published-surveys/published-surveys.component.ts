@@ -5,16 +5,15 @@ import * as Query from '../query'; //to import everything from file
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
-  selector: 'app-editable-surveys',
-  templateUrl: './editable-surveys.component.html',
-  styleUrls: ['./editable-surveys.component.css']
+  selector: 'app-published-surveys',
+  templateUrl: './published-surveys.component.html',
+  styleUrls: ['./published-surveys.component.css']
 })
-export class EditableSurveysComponent implements OnInit {
-  surveys: any = [];
+export class PublishedSurveysComponent implements OnInit {
+  surveys: any = []
   constructor(
     private apollo: Apollo
-    ) { 
-  }
+  ) {}
 
   ngOnInit() {
     this.getSurveys();
@@ -50,4 +49,5 @@ export class EditableSurveysComponent implements OnInit {
       console.log(error);
     });
   }
+
 }
