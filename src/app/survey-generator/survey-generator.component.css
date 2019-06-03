@@ -1,27 +1,33 @@
 .p-t-sm{
   padding-top: 2em;
 }
+
 .p-l-sm{
   padding-left: 1em;
 }
+
 .p-r-sm{
   padding-right: 1em;
 }
+
 .m-b-sm{
   margin-bottom: 0.5em;
 }
+
 .full-height{
   height: 92vh;
 }
+
 .center{
   display: flex;
   align-items: center;
   justify-content: center;
 }
+
 .float-bottom{
   display: flex;
   flex-direction: column;
   position: fixed;
   top: 5em;
-  left: 9em;
+  left: 8em;
 }

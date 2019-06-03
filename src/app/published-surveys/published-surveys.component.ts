@@ -20,6 +20,8 @@ export class PublishedSurveysComponent implements OnInit {
   }
 
   getSurveys(){
+    this.apollo.watchQuery({ query: Query.readSurveys }).refetch();
+
     this.apollo.watchQuery({ query: Query.readSurveys }).valueChanges
       .subscribe(response => {
         this.surveys = response.data['readSurveys'];
@@ -33,7 +35,7 @@ export class PublishedSurveysComponent implements OnInit {
       variables: {
         id: id
       },
-      update: (proxy, { data: { deleteProduct } }) => {
+      update: (proxy, { data: { deleteSurvey } }) => {
         const data: any = proxy.readQuery({ query: Query.readSurveys });
 
         const index = this.surveys.findIndex(x => x.id == id)

@@ -11,9 +11,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class EditableSurveysComponent implements OnInit {
   surveys: any = [];
-  constructor(
-    private apollo: Apollo
-    ) { 
+  constructor(private apollo: Apollo) { 
   }
 
   ngOnInit() {
@@ -21,6 +19,8 @@ export class EditableSurveysComponent implements OnInit {
   }
 
   getSurveys(){
+    this.apollo.watchQuery({ query: Query.readSurveys }).refetch();
+
     this.apollo.watchQuery({ query: Query.readSurveys }).valueChanges
       .subscribe(response => {
         this.surveys = response.data['readSurveys'];
@@ -34,7 +34,7 @@ export class EditableSurveysComponent implements OnInit {
       variables: {
         id: id
       },
-      update: (proxy, { data: { deleteProduct } }) => {
+      update: (proxy, { data: { deleteSurvey } }) => {
         const data: any = proxy.readQuery({ query: Query.readSurveys });
 
         const index = this.surveys.findIndex(x => x.id == id)

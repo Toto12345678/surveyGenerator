@@ -7,7 +7,7 @@ import { PublishedSurveysComponent } from './published-surveys/published-surveys
 const routes: Routes = [
   { path: 'editable-surveys', component: EditableSurveysComponent },
   { path: 'published-surveys', component: PublishedSurveysComponent },
-  {path: '', redirectTo: '/survey-generator', pathMatch: 'full'},
+  { path: '', redirectTo: '/survey-generator', pathMatch: 'full'},
   { path: 'survey-generator/:id', component: SurveyGeneratorComponent},
   { path: 'survey-generator', component: SurveyGeneratorComponent}
 ];
